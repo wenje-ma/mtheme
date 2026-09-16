@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+﻿\documentclass[10pt]{beamer}
 
 \usetheme{metropolis}
 \usepackage{appendixnumberbeamer}
@@ -12,12 +12,20 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
+\usepackage{xeCJK}
+\setCJKmainfont{SimHei}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{SimHei}
+
 \title{Metropolis}
 \subtitle{A modern beamer theme}
 \date{\today}
 \author{Matthias Vogelgesang}
 \institute{Center for modern beamer themes}
-% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{demo.bib}
 
 \begin{document}
 
@@ -328,8 +336,8 @@ or show \textbf{bold} results.\end{verbatim}
 
 \begin{frame}[allowframebreaks]{References}
 
-  \bibliography{demo}
-  \bibliographystyle{abbrv}
+  \printbibliography
+
 
 \end{frame}
 
