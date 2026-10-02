@@ -1,0 +1,388 @@
+---
+title: "Metropolis"
+subtitle: "A modern beamer theme"
+author: "Matthias Vogelgesang"
+institute: "Center for modern beamer themes"
+date: today
+bibliography: demo.bib
+format:
+  beamer:
+    theme: metropolis
+    fontsize: 10pt
+    pdf-engine: xelatex
+    section-titles: false
+    mainfont: "Latin Modern Roman"
+    sansfont: "Latin Modern Roman"
+    monofont: "Consolas"
+    include-in-header:
+      text: |
+        \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+        \usepackage{appendixnumberbeamer}
+        \usepackage{booktabs}
+        \usepackage[scale=2]{ccicons}
+        \usepackage{pgfplots}
+        \usepgfplotslibrary{dateplot}
+        \usepackage{xspace}
+        \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+        \usepackage{xeCJK}
+        \setCJKmainfont{SimHei}
+        \setCJKsansfont{SimHei}
+        \setCJKmonofont{SimHei}
+        \usefonttheme{professionalfonts}
+        \usepackage{unicode-math}
+        \setmathfont{Latin Modern Math}
+---
+
+## Table of contents
+
+```{=latex}
+\setbeamertemplate{section in toc}[sections numbered]
+\tableofcontents[hideallsubsections]
+```
+
+# Introduction
+
+## Metropolis
+
+The `\themename`{=latex} theme is a Beamer theme with minimal visual noise
+inspired by the [hsrm Beamer Theme](https://github.com/hsrmbeamertheme/hsrmbeamertheme)
+by Benjamin Weiss.
+
+Enable the theme by loading
+
+```latex
+\documentclass{beamer}
+\usetheme{metropolis}
+```
+
+Note, that you have to have Mozilla's *Fira Sans* font and XeTeX
+installed to enjoy this wonderful typography.
+
+## Sections
+
+Sections group slides of the same topic
+
+```latex
+\section{Elements}
+```
+
+for which `\themename`{=latex} provides a nice progress indicator …
+
+# Title formats
+
+## Metropolis title formats
+
+`\themename`{=latex} supports 4 different title formats:
+
+- Regular
+- `\textsc{Small caps}`{=latex}
+- `\textsc{all small caps}`{=latex}
+- ALL CAPS
+
+They can either be set at once for every title type or individually.
+
+::: {=latex}
+\metroset{titleformat frame=smallcaps}
+:::
+
+## Small caps
+
+This frame uses the `smallcaps` title format.
+
+::: {=latex}
+\begin{alertblock}{Potential Problems}
+Be aware that not every font supports small caps. If for example you typeset your presentation with pdfTeX and the Computer Modern Sans Serif font, every text in small caps will be typeset with the Computer Modern Serif font instead.
+\end{alertblock}
+:::
+
+::: {=latex}
+\metroset{titleformat frame=allsmallcaps}
+:::
+
+## All small caps
+
+This frame uses the `allsmallcaps` title format.
+
+::: {=latex}
+\begin{alertblock}{Potential problems}
+As this title format also uses small caps you face the same problems as with the \texttt{smallcaps} title format. Additionally this format can cause some other problems. Please refer to the documentation if you consider using it.
+
+As a rule of thumb: just use it for plaintext-only titles.
+\end{alertblock}
+:::
+
+::: {=latex}
+\metroset{titleformat frame=allcaps}
+:::
+
+## All caps
+
+This frame uses the `allcaps` title format.
+
+::: {=latex}
+\begin{alertblock}{Potential Problems}
+This title format is not as problematic as the \texttt{allsmallcaps} format, but basically suffers from the same deficiencies. So please have a look at the documentation if you want to use it.
+\end{alertblock}
+:::
+
+# Elements
+
+## Typography
+
+```latex
+The theme provides sensible defaults to
+\emph{emphasize} text, \alert{accent} parts
+or show \textbf{bold} results.
+```
+
+::: {=latex}
+\begin{center}becomes\end{center}
+:::
+
+The theme provides sensible defaults to *emphasize* text,
+`\alert{accent}`{=latex} parts or show **bold** results.
+
+## Font feature test
+
+- Regular
+- *Italic*
+- `\textsc{Small Caps}`{=latex}
+- **Bold**
+- ***Bold Italic***
+- `\textbf{\textsc{Bold Small Caps}}`{=latex}
+- `\texttt{Monospace}`{=latex}
+- `\texttt{\textit{Monospace Italic}}`{=latex}
+- `\texttt{\textbf{Monospace Bold}}`{=latex}
+- `\texttt{\textbf{\textit{Monospace Bold Italic}}}`{=latex}
+
+## Lists
+
+::: {=latex}
+\begin{columns}[T,onlytextwidth]
+  \column{0.33\textwidth}
+    Items
+    \begin{itemize}
+      \item Milk \item Eggs \item Potatoes
+    \end{itemize}
+
+  \column{0.33\textwidth}
+    Enumerations
+    \begin{enumerate}
+      \item First, \item Second and \item Last.
+    \end{enumerate}
+
+  \column{0.33\textwidth}
+    Descriptions
+    \begin{description}
+      \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
+    \end{description}
+\end{columns}
+:::
+
+## Animation
+
+::: {=latex}
+\begin{itemize}[<+- | alert@+>]
+  \item \alert<4>{This is\only<4>{ really} important}
+  \item Now this
+  \item And now this
+\end{itemize}
+:::
+
+## Figures
+
+::: {=latex}
+\begin{figure}
+  \newcounter{density}
+  \setcounter{density}{20}
+  \begin{tikzpicture}
+    \def\couleur{alerted text.fg}
+    \path[coordinate] (0,0)  coordinate(A)
+                ++( 90:5cm) coordinate(B)
+                ++(0:5cm) coordinate(C)
+                ++(-90:5cm) coordinate(D);
+    \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
+    \foreach \x in {1,...,40}{%
+        \pgfmathsetcounter{density}{\thedensity+20}
+        \setcounter{density}{\thedensity}
+        \path[coordinate] coordinate(X) at (A){};
+        \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
+                            -- (C) coordinate[pos=.10](B)
+                            -- (D) coordinate[pos=.10](C)
+                            -- (X) coordinate[pos=.10](D);
+        \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
+    }
+  \end{tikzpicture}
+  \caption{Rotated square from
+  \href{http://www.texample.net/tikz/examples/rotated-polygons/}{texample.net}.}
+\end{figure}
+:::
+
+## Tables
+
+::: {=latex}
+\begin{table}
+  \caption{Largest cities in the world (source: Wikipedia)}
+  \begin{tabular}{@{} lr @{}}
+    \toprule
+    City & Population\\
+    \midrule
+    Mexico City & 20,116,842\\
+    Shanghai & 19,210,000\\
+    Peking & 15,796,450\\
+    Istanbul & 14,160,467\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+:::
+
+## Blocks
+
+Three different block environments are pre-defined and may be styled with an
+optional background color.
+
+::: {=latex}
+\begin{columns}[T,onlytextwidth]
+  \column{0.5\textwidth}
+    \begin{block}{Default}
+      Block content.
+    \end{block}
+
+    \begin{alertblock}{Alert}
+      Block content.
+    \end{alertblock}
+
+    \begin{exampleblock}{Example}
+      Block content.
+    \end{exampleblock}
+
+  \column{0.5\textwidth}
+
+    \metroset{block=fill}
+
+    \begin{block}{Default}
+      Block content.
+    \end{block}
+
+    \begin{alertblock}{Alert}
+      Block content.
+    \end{alertblock}
+
+    \begin{exampleblock}{Example}
+      Block content.
+    \end{exampleblock}
+
+\end{columns}
+:::
+
+## Math
+
+$$
+\mathrm{e} = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
+$$
+
+## Line plots
+
+::: {=latex}
+\begin{figure}
+  \begin{tikzpicture}
+    \begin{axis}[
+      mlineplot,
+      width=0.9\textwidth,
+      height=6cm,
+    ]
+
+      \addplot {sin(deg(x))};
+      \addplot+[samples=100] {sin(deg(2*x))};
+
+    \end{axis}
+  \end{tikzpicture}
+\end{figure}
+:::
+
+## Bar charts
+
+::: {=latex}
+\begin{figure}
+  \begin{tikzpicture}
+    \begin{axis}[
+      mbarplot,
+      xlabel={Foo},
+      ylabel={Bar},
+      width=0.9\textwidth,
+      height=6cm,
+    ]
+
+    \addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
+    \addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
+    \addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
+
+    \legend{lorem, ipsum, dolor}
+
+    \end{axis}
+  \end{tikzpicture}
+\end{figure}
+:::
+
+## Quotes
+
+> Veni, Vidi, Vici
+
+## Frame footer {.fragile}
+
+::: {=latex}
+\setbeamertemplate{frame footer}{My custom footer}
+:::
+
+`\themename`{=latex} defines a custom beamer template to add a text to the footer. It can be set via
+
+```latex
+\setbeamertemplate{frame footer}{My custom footer}
+```
+
+## References {.allowframebreaks}
+
+::: {=latex}
+\setbeamertemplate{frame footer}{}
+:::
+
+Some references to showcase @knuth92, @ConcreteMath, @Simpson, @Er01, @greenwade93
+
+# Conclusion
+
+## Summary
+
+Get the source of this theme and the demo presentation from
+
+::: {=latex}
+\begin{center}\url{github.com/matze/mtheme}\end{center}
+:::
+
+The theme *itself* is licensed under a
+[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+::: {=latex}
+\begin{center}\ccbysa\end{center}
+:::
+
+## Questions? {.standout}
+
+## Backup slides
+
+::: {=latex}
+\appendix
+:::
+
+Sometimes, it is useful to add slides at the end of your presentation to
+refer to during audience questions.
+
+The best way to do this is to include the `appendixnumberbeamer`
+package in your preamble and call `\appendix` before your backup slides.
+
+`\themename`{=latex} will automatically turn off slide numbering and progress bars for
+slides in the appendix.
+
+## References {.allowframebreaks}
+
+::: {.refs}
+:::
